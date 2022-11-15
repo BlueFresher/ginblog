@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-let Url = 'http://localhost:3001/api/v1/'
+let Url = 'http://101.42.137.141:3001/api/v1/'
 axios.defaults.baseURL = Url
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
