@@ -85,6 +85,7 @@ func GetArticle(c *gin.Context) {
 	} else {
 
 		data, code, total = model.GetArticle(title, pageSize, pageNum)
+		// total = len(data)
 		_, err := model.DeleteArticlesRedis()
 		if err != nil {
 			log.Println("Redis缓存清空失败")

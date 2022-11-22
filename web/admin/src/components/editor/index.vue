@@ -5,8 +5,6 @@
 </template>
 
 <script>
-
-import tinymce from 'tinymce/tinymce'
 import Editor from '@tinymce/tinymce-vue'
 import './tinymce.min.js'
 import './icons/default/icons.min.js'

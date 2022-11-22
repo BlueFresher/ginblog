@@ -12,7 +12,7 @@ import (
 func createMyRender() multitemplate.Renderer {
 	p := multitemplate.NewRenderer()
 	p.AddFromFiles("admin", "web/admin/dist/index.html")
-	p.AddFromFiles("front", "web/front/dist/index.html")
+	p.AddFromFiles("display", "web/display/dist/index.html")
 	return p
 }
 
@@ -24,19 +24,30 @@ func InitRouter() {
 	r.Use(middleware.Logger())
 	r.Use(middleware.Cors())
 
-	r.Static("admin/static", "static/admin/static")
-	r.StaticFile("admin/favicon.ico", "static/admin/favicon.ico")
+	r.Static("/static", "./web/display/dist/static")
+	r.Static("/admin", "./web/admin/dist")
+	r.StaticFile("/favicon.ico", "/web/display/dist/favicon.ico")
 
-	r.Static("front/static", "static/front/static")
-	r.StaticFile("front/favicon.ico", "static/front/favicon.ico")
-
-	r.GET("/front", func(c *gin.Context) {
-		c.HTML(200, "front", nil)
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(200, "display", nil)
 	})
 
 	r.GET("/admin", func(c *gin.Context) {
 		c.HTML(200, "admin", nil)
 	})
+	// r.Static("admin/static", "static/admin/static")
+	// r.StaticFile("admin/favicon.ico", "static/admin/favicon.ico")
+
+	// r.Static("front/static", "static/front/static")
+	// r.StaticFile("front/favicon.ico", "static/front/favicon.ico")
+
+	// r.GET("/front", func(c *gin.Context) {
+	// 	c.HTML(200, "front", nil)
+	// })
+
+	// r.GET("/admin", func(c *gin.Context) {
+	// 	c.HTML(200, "admin", nil)
+	// })
 
 	auth := r.Group("api/v1")
 	auth.Use(middleware.JwtToken())

@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
 import './plugins/http'
+import ElementUI from 'element-ui';
+
+Vue.use(ElementUI)
 
 // import moment from 'moment'
 import day from 'dayjs'

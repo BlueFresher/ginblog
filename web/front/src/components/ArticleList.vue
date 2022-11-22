@@ -20,11 +20,14 @@
             </v-row>
         </v-card>
         <div class="text-center">
-            <v-pagination total-visible="5" v-model="queryParam.pagenum" :length="Math.ceil(this.total/queryParam.pagesize)"
-            @input="getArtList">
-
-            </v-pagination>
-        </div>
+            <v-pagination
+              color="indigo"
+              total-visible="7"
+              v-model="queryParam.pagenum"
+              :length="Math.ceil(total / queryParam.pagesize)"
+              @input="getArtList()"
+            ></v-pagination>
+          </div>
     </v-col>
 </template>
 
@@ -41,6 +44,8 @@ export default {
        } 
     },
     created(){
+    },
+    mounted(){
         this.getArtList()
     },
     methods:{

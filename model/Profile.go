@@ -9,8 +9,8 @@ type Profile struct {
 	Qqchat    string `gorm:"type:varchar(200)" json:"qq_chat"`
 	Wechat    string `gorm:"type:varchar(100)" json:"wechat"`
 	Weibo     string `gorm:"type:varchar(200)" json:"weibo"`
-	blibli    string `gorm:"type:varchar(200)" json:"blibli"`
 	Email     string `gorm:"type:varchar(200)" json:"email"`
+	Github    string `gorm:"type:varchar(200)" json:"github"`
 	Img       string `gorm:"type:varchar(200)" json:"img"`
 	Avatar    string `gorm:"type:varchar(200)" json:"avatar"`
 	IcpRecord string `gorm:"type:varchar(200)" json:"icp_record"`

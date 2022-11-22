@@ -22,6 +22,8 @@ var (
 	Secretkey   string
 	Bucket      string
 	QiNiuServer string
+
+	ReHost string
 )
 
 func init() {
@@ -32,6 +34,7 @@ func init() {
 	LoadServer(file)
 	LoadData(file)
 	LoadQiNiu(file)
+	LoadRedist(file)
 }
 
 func LoadServer(file *ini.File) {
@@ -55,4 +58,7 @@ func LoadQiNiu(file *ini.File) {
 	Secretkey = file.Section("qiniu").Key("Secretkey").String()
 	Bucket = file.Section("qiniu").Key("Bucket").String()
 	QiNiuServer = file.Section("qiniu").Key("QiNiuServer").String()
+}
+func LoadRedist(file *ini.File) {
+	ReHost = file.Section("redis").Key("ReHost").String()
 }

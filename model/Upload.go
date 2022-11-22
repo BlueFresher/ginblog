@@ -16,6 +16,8 @@ var Bucket = utils.Bucket
 var ImgUrl = utils.QiNiuServer
 
 func UpLoadFile(file multipart.File, fileSize int64) (string, int) {
+
+	// return url, errmsg.SUCCESS
 	putPolicy := storage.PutPolicy{
 		Scope: Bucket,
 	}

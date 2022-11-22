@@ -24,12 +24,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login
   },
   {
     path: '/',
-    name: 'Admin',
+    name: 'admin',
     component: Admin,
     children: [
       {path: 'index', component: Index},

@@ -25,8 +25,8 @@
           <a-input style="width: 300px" v-model="profileInfo.weibo"></a-input>
         </a-form-model-item>
   
-        <a-form-model-item label="B站地址">
-          <a-input style="width: 300px" v-model="profileInfo.bili"></a-input>
+        <a-form-model-item label="github">
+          <a-input style="width: 300px" v-model="profileInfo.github"></a-input>
         </a-form-model-item>
   
         <a-form-model-item label="Email">
@@ -88,13 +88,13 @@
           qq_chat: '',
           wechat: '',
           weibo: '',
-          bili: '',
+          github: '',
           email: '',
           img: '',
           avatar: '',
           icp_record: '',
         },
-        upUrl: Url + 'upload',
+        upUrl: Url + '/upload',
         headers: {},
       }
     },
@@ -106,6 +106,7 @@
       // 获取个人设置
       async getProfileInfo() {
         const { data: res } = await this.$http.get(`admin/profile/${this.profileInfo.id}`)
+        console.log(res)
         if (res.status !== 200) {
           if (res.status === 1004 || 1005 || 1006 || 1007) {
             window.sessionStorage.clear()
@@ -118,26 +119,28 @@
   
       // 上传头像
       avatarChange(info) {
-        if (info.file.status !== 'uploading') {
+        if (info.file.status != 'uploading') {
         }
-        if (info.file.status === 'done') {
+        if (info.file.status == 'done') {
           this.$message.success(`图片上传成功`)
           const imgUrl = info.file.response.url
+          console.log(imgUrl)
           this.profileInfo.avatar = imgUrl
-        } else if (info.file.status === 'error') {
+        } else if (info.file.status == 'error') {
           this.$message.error(`图片上传失败`)
         }
       },
   
       // 上传头像背景图
       imgChange(info) {
-        if (info.file.status !== 'uploading') {
+        if (info.file.status != 'uploading') {
         }
-        if (info.file.status === 'done') {
+        if (info.file.status == 'done') {
           this.$message.success(`图片上传成功`)
           const imgUrl = info.file.response.url
+          console.log(imgUrl)
           this.profileInfo.img = imgUrl
-        } else if (info.file.status === 'error') {
+        } else if (info.file.status == 'error') {
           this.$message.error(`图片上传失败`)
         }
       },
@@ -147,6 +150,7 @@
         const { data: res } = await this.$http.put(`profile/${this.profileInfo.id}`, this.profileInfo)
         if (res.status !== 200) return this.$message.error(res.message)
         this.$message.success(`个人信息更新成功`)
+        console.log(this.profileInfo)
         this.$router.push('/index')
       },
     },

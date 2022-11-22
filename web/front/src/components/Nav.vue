@@ -22,28 +22,35 @@
         <v-list nav dense>
             <v-list-item>
                 <v-list-item-icon class="ma-3">
-                    <v-icon>{{'mdi-qqchat'}}</v-icon>
+                    <v-icon color="blue darken-2">{{'mdi-qqchat'}}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content class="grey-text">{{profileInfo.qq_chat}}</v-list-item-content>
             </v-list-item>
             
             <v-list-item>
                 <v-list-item-icon class="ma-3">
-                    <v-icon>{{'mdi-wechat'}}</v-icon>
+                    <v-icon color="green darken-2">{{'mdi-wechat'}}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content class="grey-text">{{profileInfo.wechat}}</v-list-item-content>
             </v-list-item>
 
             <v-list-item>
                 <v-list-item-icon class="ma-3">
-                    <v-icon>{{'mdi-sina-weibo'}}</v-icon>
+                    <v-icon grey="orange darken-2">{{'mdi-sina-weibo'}}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content class="grey-text">{{profileInfo.weibo}}</v-list-item-content>
             </v-list-item>
 
             <v-list-item>
                 <v-list-item-icon class="ma-3">
-                    <v-icon>{{'mdi-email'}}</v-icon>
+                    <v-icon color="indigo">{{'mdi-email'}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content class="grey-text">{{profileInfo.email}}</v-list-item-content>
+            </v-list-item>
+
+            <v-list-item>
+                <v-list-item-icon class="ma-3">
+                    <v-icon color="grey darken-2">{{'mdi-github'}}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content class="grey-text">{{profileInfo.email}}</v-list-item-content>
             </v-list-item>

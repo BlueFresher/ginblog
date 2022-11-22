@@ -2,6 +2,7 @@ package model
 
 import (
 	"encoding/json"
+	"ginblog/utils"
 	"ginblog/utils/errmsg"
 	"log"
 	"time"
@@ -13,7 +14,7 @@ var DBrs *redis.Client
 
 func InitRedis() {
 	redisDb := redis.NewClient(&redis.Options{
-		Addr:     "127.0.0.1:6379", // 指定
+		Addr:     utils.ReHost + ":6379", // 指定
 		Password: "",
 		DB:       0, // redis一共16个库，指定其中一个库即可
 	})

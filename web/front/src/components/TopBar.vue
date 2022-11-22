@@ -182,7 +182,7 @@
           console.log(res)
           window.sessionStorage.setItem('username', res.data)
           window.sessionStorage.setItem('user_id', res.id)
-          // this.$message.success('登录成功')
+          this.$message.success('登录成功')
           // this.$router.go(val) => 在history记录中前进或者后退val步，当val为0时刷新当前页面。
           this.$router.go(0)
         },
@@ -191,7 +191,7 @@
         loginout() {
           window.sessionStorage.clear('token')
           window.sessionStorage.clear('username')
-          // this.$message.success('退出成功')
+          this.$message.success('退出成功')
           this.$router.go(0)
         },
 
@@ -205,7 +205,7 @@
               role: 2
             })
             if (res.status !== 200) return this.$message.error(res.message)
-            // this.$message.success('注册成功')
+            this.$message.success('注册成功')
             this.$router.go(0)
         }
       },
