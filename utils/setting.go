@@ -59,6 +59,7 @@ func LoadQiNiu(file *ini.File) {
 	Bucket = file.Section("qiniu").Key("Bucket").String()
 	QiNiuServer = file.Section("qiniu").Key("QiNiuServer").String()
 }
+
 func LoadRedist(file *ini.File) {
 	ReHost = file.Section("redis").Key("ReHost").String()
 }
