@@ -152,7 +152,7 @@ export default {
   },
   methods: {
     clickAdmin() {
-      window.location.href= Url + ":3001/admin/"
+      window.location.href= Url + "/admin/"
     },
     // 通过标题查找文章
     searchTitle(title) {

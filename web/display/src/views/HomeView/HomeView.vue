@@ -105,7 +105,7 @@ export default {
       this.$router.push("/about");
     },
     clickAdmin() {
-      window.location.href= Url + ":3001/admin/"
+      window.location.href= Url + "/admin/"
     },
     goQQ() {
       //qq弹窗内容

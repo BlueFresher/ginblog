@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-let Url = 'http://localhost:3001/api/v1'
+let Url = 'http://101.42.137.141:3001/api/v1'
 // axios.defaults.baseURL = Url
-let protocol = window.location.protocol; //协议
-let host = window.location.host; //主机
+// let protocol = window.location.protocol; //协议
+// let host = window.location.host; //主机
 // let reg = /^localhost+/;
 // if(reg.test(host)) {
 //    //若本地项目调试使用
@@ -12,8 +12,8 @@ let host = window.location.host; //主机
 //     Url = 'http://localhost:3001/api/v1';
 // } else {
     //动态请求地址             协议               主机
-    axios.defaults.baseURL = protocol + "//" + host.slice(0,9)  +":3001/api/v1/";
-    Url = protocol + "//" + host.slice(0,9)  +":3001/api/v1";
+    axios.defaults.baseURL = 'http://101.42.137.141:3001/api/v1/';
+    // Url = protocol + "//" + host.slice(0,9)  +":3001/api/v1";
 // }
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
