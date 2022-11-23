@@ -62,7 +62,7 @@ export default {
   background: url("@/assets/cover6.gif");
   background-repeat: no-repeat;
   background-size: 500px;
-  background-position: 105% 100%;
+  background-position: 110% 100%;
   background-attachment: fixed;
 
   .mainBox {

@@ -18,7 +18,7 @@
       <!-- id="busuanzi_value_site_uv" -->
       <!-- >233333</span -->
       <!-- >👦<br /> -->
-      网站苟活 {{ day }}天 {{ h }}小时 {{ min }}分钟 {{ sec }}秒<br />
+      网站存活 {{ day }}天 {{ h }}小时 {{ min }}分钟 {{ sec }}秒<br />
       <!-- power by 🧡Chaichai🧡<br /> -->
       <!-- 开源协议 MIT License <br /> -->
       <!-- <a href="https://beian.miit.gov.cn/" style="color: #fff" target="_blank">滇ICP备2022000365号</a> -->

@@ -30,7 +30,7 @@ func InitRedis() {
 func AddArticlesRedis(articles []string) {
 	DBrs.RPush("articles", articles)
 	// 设置2小时过期时间
-	DBrs.Expire("articles", 180*time.Second)
+	DBrs.Expire("articles", 1800*time.Second)
 }
 
 func DeleteArticlesRedis() (n int64, err error) {
@@ -38,18 +38,28 @@ func DeleteArticlesRedis() (n int64, err error) {
 	return n, err
 }
 
-func GetArticlesRedist(pageNum, pageSize int) ([]Article, int) {
+func GetArticlesRedist(pageNum, pageSize int) ([]Article, int, int) {
 	page := (pageNum - 1) * pageSize
 	articlesRedis := DBrs.LRange("articles", int64(page), int64(page+pageSize)).Val()
 	var ret = make([]Article, 0)
-	for _, v := range articlesRedis {
-		var article Article
-		v1 := []byte(v)
-		err := json.Unmarshal(v1, &article)
-		if err != nil {
-			return nil, errmsg.ERROR_REDIS_DESERIALIZE_WRONG
+	var total int
+
+	for i, v := range articlesRedis {
+		if i == 0 {
+			v1 := []byte(v)
+			err := json.Unmarshal(v1, &total)
+			if err != nil {
+				return nil, 0, errmsg.ERROR_REDIS_DESERIALIZE_WRONG
+			}
+		} else {
+			var article Article
+			v1 := []byte(v)
+			err := json.Unmarshal(v1, &article)
+			if err != nil {
+				return nil, 0, errmsg.ERROR_REDIS_DESERIALIZE_WRONG
+			}
+			ret = append(ret, article)
 		}
-		ret = append(ret, article)
 	}
-	return ret, errmsg.SUCCESS
+	return ret, total, errmsg.SUCCESS
 }

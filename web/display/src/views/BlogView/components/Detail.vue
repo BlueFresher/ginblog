@@ -9,7 +9,7 @@
             
               <div class="d-flex mr-10 justify-center">
                 <v-icon class="mr-1" color="pink" small>{{ 'mdi-comment' }}</v-icon>
-                <span>{{ commentList.length}}</span>
+                <span>{{ total}}</span>
               </div>
               <div class="d-flex mr-10 justify-center">
                 <v-icon class="mr-1" color="green" small>{{ 'mdi-eye' }}</v-icon>
@@ -63,7 +63,7 @@
                     class="my-2"
                     total-visible="7"
                     v-model="queryParam.pagenum"
-                    :length="Math.ceil(commentList.length / queryParam.pagesize)"
+                    :length="Math.ceil(total / queryParam.pagesize)"
                     @input="getCommentList()"
                   ></v-pagination>
                 </div>
@@ -98,7 +98,8 @@ export default {
             queryParam: {
                 pagesize: 5,
                 pagenum: 1
-            }
+            },
+            total:0
         }
     },
     created(){
@@ -126,6 +127,7 @@ export default {
         })
         console.log(res)
         this.commentList = res.data
+        this.total = res.total
        },
 
        async pushComment() {

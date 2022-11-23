@@ -62,7 +62,7 @@
       </v-list>
         <v-divider>🌴</v-divider>
         <!-- 侧边栏底部图片 -->
-        <img src="@/assets/huli.gif" alt="" class="bottomImg" />
+        <img src="@/assets/aside3.gif" alt="" class="bottomImg" />
       </div>
       <div v-if="btnFlag" class="go-top" @click="backTop">
         <!-- 返回顶部图标 -->

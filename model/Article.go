@@ -60,18 +60,23 @@ func DeleteArticle(id int) int {
 }
 
 // 查询文章列表
-func GetArticle(title string, pageSize int, pageNum int) ([]Article, int, int) {
+func GetArticle(pageSize int, pageNum int) ([]Article, int, int) {
 	var articleList []Article
 	var total int
-	if title == "" {
-		err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articleList).Error
-		// 这是记录总数的，所以total=len(articleList)是不对的
-		db.Model(&articleList).Count(&total)
-		if err != nil && err != gorm.ErrRecordNotFound {
-			return nil, errmsg.ERROR, 0
-		}
-		return articleList, errmsg.SUCCESS, total
+
+	err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articleList).Error
+	// 这是记录总数的，所以total=len(articleList)是不对的
+	db.Model(&articleList).Count(&total)
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, errmsg.ERROR, 0
 	}
+	return articleList, errmsg.SUCCESS, total
+
+}
+
+func SearchArticle(title string, pageSize int, pageNum int) ([]Article, int, int) {
+	var articleList []Article
+	var total int
 	err = db.Preload("Category").Where("title LIKE ?", title+"%").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articleList).Error
 	db.Model(&articleList).Where("title LIKE ?", title+"%").Count(&total)
 	if err != nil && err != gorm.ErrRecordNotFound {

@@ -1,7 +1,5 @@
 # **长安的荔枝**
 
-<!-- ![7201279F43E8AAE80C675ECDCF503142](http://chaichaiimage.oss-cn-hangzhou.aliyuncs.com/blog3.0/bg15.jpg) -->
-
 <!-- &nbsp;
 &nbsp;
 &nbsp;
@@ -24,6 +22,8 @@
 ### 莫吹羌笛惊邻里，不用琵琶喧洞房。
 ### 且歌新夜曲，莫弄楚明光。
 ### 此曲怨且艳，哀音断人肠。
+
+![7201279F43E8AAE80C675ECDCF503142](../assets/aside.gif)
 ```
 
 

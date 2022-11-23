@@ -64,43 +64,67 @@ func GetArticle(c *gin.Context) {
 	pageNum, _ := strconv.Atoi(c.Query("pagenum"))
 	title := c.Query("title")
 
-	if pageSize == 0 {
-		pageSize = -1
+	switch {
+	case pageSize >= 100:
+		pageSize = 100
+	case pageSize <= 0:
+		pageSize = 10
 	}
+
 	if pageNum == 0 {
-		pageSize = -1
+		pageNum = 1
 	}
 
-	n, _ := model.DBrs.Exists("articles").Result()
+	// 查询所有文章时，走redis缓存
+	if len(title) == 0 {
+		n, _ := model.DBrs.Exists("articles").Result()
 
-	var data []model.Article
-	var code int
-	var total int
-	if n > 0 {
-		log.Println("走Redis缓存.")
-		timee := model.DBrs.TTL("articles").Val()
-		log.Println("缓存过期剩余时间：", timee)
-		data, code = model.GetArticlesRedist(pageNum, pageSize)
-		total = len(data)
-	} else {
+		var data []model.Article
+		var code int
+		var total int
+		if n > 0 {
+			log.Println("走Redis缓存.")
+			timee := model.DBrs.TTL("articles").Val()
+			log.Println("缓存过期剩余时间：", timee)
+			data, total, code = model.GetArticlesRedist(pageNum, pageSize)
+		} else {
 
-		data, code, total = model.GetArticle(title, pageSize, pageNum)
-		// total = len(data)
-		_, err := model.DeleteArticlesRedis()
-		if err != nil {
-			log.Println("Redis缓存清空失败")
-		}
-		articles := make([]string, 0)
-		for _, v := range data {
-			article, err := json.Marshal(v)
-			if err != nil {
-				code = errmsg.ERROR_REDIS_DESERIALIZE_WRONG
-				break
+			data, code, total = model.GetArticle(pageSize, pageNum)
+			// total = len(data)
+			_, err := model.DeleteArticlesRedis()
+			if err == nil {
+				articles := make([]string, 0)
+				totalJson, err := json.Marshal(total)
+				if err != nil {
+					code = errmsg.ERROR_REDIS_DESERIALIZE_WRONG
+				}
+				articles = append(articles, string(totalJson))
+				for _, v := range data {
+					article, err := json.Marshal(v)
+					if err != nil {
+						code = errmsg.ERROR_REDIS_DESERIALIZE_WRONG
+						break
+					}
+					articles = append(articles, string(article))
+				}
+				model.AddArticlesRedis(articles)
+			} else {
+				log.Println("Redis缓存清空失败")
 			}
-			articles = append(articles, string(article))
+
 		}
-		model.AddArticlesRedis(articles)
+
+		// data, code, total := model.GetArticle(pageSize, pageNum)
+		c.JSON(http.StatusOK, gin.H{
+			"status":  code,
+			"data":    data,
+			"total":   total,
+			"message": errmsg.GetErrMsg(code),
+		})
+		return
 	}
+	// 查询分类文章时
+	data, code, total := model.SearchArticle(title, pageSize, pageNum)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,

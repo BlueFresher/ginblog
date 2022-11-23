@@ -21,11 +21,11 @@ export default {
 
   components: { HomeView, AboutView },
   mounted() {
-    document.addEventListener('click', (e) => {
-      if (e.isTrusted) {
-        this.$refs.au.play()
-      }
-    })
+    // document.addEventListener('click', (e) => {
+    //   if (e.isTrusted) {
+    //     this.$refs.au.play()
+    //   }
+    // })
   },
 
   data() {
