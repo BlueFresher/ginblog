@@ -12,8 +12,8 @@ let host = window.location.host; //主机
 //     Url = 'http://localhost:3001/api/v1';
 // } else {
     //动态请求地址             协议               主机
-    axios.defaults.baseURL = protocol + "//" + host.slice(0,9)  +":3001/api/v1/";
-    let Url = protocol + "//" + host.slice(0,9)  +":3001";
+    axios.defaults.baseURL = "http://101.42.137.141:80/api/v1/";
+    let Url = "http://101.42.137.141:80";
 // }
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
